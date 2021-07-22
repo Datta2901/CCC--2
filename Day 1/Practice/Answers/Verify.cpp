@@ -24,6 +24,12 @@ LL* insertAtBeginning(LL* head, int data) {
 
 LL* insertAtEnd(LL* head, int data) {
     LL* temp = head;
+    if(head == NULL){
+        LL *newnode = (LL*)malloc(sizeof(LL));
+        newnode->data = data;
+        head = newnode;
+        return head;
+    }
     while(temp->next != NULL){
         temp = temp->next;
     }
@@ -44,15 +50,21 @@ LL* insertAtPosition(LL* head, int data, int pos) {
         newnode->next = head;
         head = newnode;
     }else{
-        while(pos-1){
-            temp = temp->next;
+        while(pos){
+            if(temp->next != NULL){
+                temp = temp->next;
+            }if(temp == NULL){
+             return head;
+            }
             pos--;
         }
+        
         newnode->next = temp->next;
         temp->next = newnode;
     }
     return head;
 }
+
 
 
 int main(){
@@ -77,8 +89,8 @@ int main(){
     // cout << "Insert at beginning ---> ";
     // print(insertAtBeginning(head,5));
     // cout << "Insert at ending --> ";
-    // print(insertAtEnd(head,5));
-    print(insertAtPosition(head,5,4));
+    print(insertAtEnd(head,6));
+    // print(insertAtPosition(head,5,4));
     
     return 0;
 }
